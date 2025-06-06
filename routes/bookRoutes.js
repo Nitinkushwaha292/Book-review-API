@@ -1,0 +1,10 @@
+const express = require("express");
+const router = express.Router();
+const auth = require("../middleware/authMiddleware");
+const { createBook, getBooks, getBookById, searchBooks } = require("../controller/bookcontroller");
+router.post("/", auth, createBook);
+router.get("/", getBooks);
+router.get("/search", searchBooks);
+router.get("/:id", getBookById);
+router.post("/:id/reviews", auth, require("../controller/reviewcontroller").addReview);
+module.exports = router;
